@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export default function Home() {
     return (
@@ -17,11 +17,9 @@ export default function Home() {
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               ></path>
             </svg>
-            <Link to={"/"}>
-            <a className="text-purple-500 hover:underline">
+            <Link to={"/"} className="text-purple-500 hover:underline">
               Home
-            </a>
             </Link>
-          </div>
-    )
+        </div>
+    );
 }
