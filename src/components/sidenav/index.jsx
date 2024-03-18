@@ -3,7 +3,7 @@ import { useState } from "react";
 export function SideNav() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="fixed top-[100px] left-0 h-full w-64 bg-gray-100 text-white p-10 z-[-2]">
+    <div className="fixed top-[100px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500 ">
       <div>
         <ul className="space-y-4 min-h-[280px] ml-3">
           <li className="flex">
@@ -54,9 +54,9 @@ export function SideNav() {
               </button>
 
               <img
-                src="../src/assets/nav-triangle-closed.svg"
+                src="../src/assets/nav-triangle-open.svg"
                 className={`h-3 w-3 text-customPurple ml-10 mt-1.5 ${
-                  isOpen ? "transform rotate-90" : ""
+                  isOpen ? "transform rotate-180" : ""
                 }`}
                 alt="arrow"
               />
