@@ -13,7 +13,8 @@ export function SideNav() {
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2"
             />
-            <Link to={"/"}
+            <Link
+              to={"/"}
               className="underline text-customPurple hover:no-underline ">
               Home
             </Link>
@@ -24,7 +25,8 @@ export function SideNav() {
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
-            <Link to={"/"}
+            <Link
+              to={"/schedule"}
               className="underline text-customPurple hover:no-underline ">
               Schedule
             </Link>
@@ -35,7 +37,8 @@ export function SideNav() {
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
-            <Link to={"workouts"}
+            <Link
+              to={"workouts"}
               className="underline text-customPurple hover:no-underline">
               Workouts
             </Link>
@@ -84,7 +87,8 @@ export function SideNav() {
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
-            <Link to={"/"}
+            <Link
+              to={"/"}
               className="text-customPurple underline hover:no-underline">
               Users
             </Link>
@@ -95,7 +99,8 @@ export function SideNav() {
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
-            <Link to={"/"}
+            <Link
+              to={"/"}
               className="text-customPurple underline hover:no-underline">
               Highscore
             </Link>

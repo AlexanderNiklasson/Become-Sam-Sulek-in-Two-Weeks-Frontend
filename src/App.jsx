@@ -5,8 +5,9 @@ import UsersPreferences from "./components/users_preferences";
 import WorkoutGenerator from "./components/workout_generator";
 import { Header } from "./components/header";
 import { SideNav } from "./components/sidenav";
-import WorkoutList from "./components/workout_list";
-import dummyWorkouts  from "./data";
+import { Schedule } from "./components/schedule";
+import { WorkoutList } from "./components/workout_list";
+import dummyWorkouts from "./data";
 
 function App() {
   const [workouts, setWorkouts] = useState(dummyWorkouts);
@@ -21,7 +22,13 @@ function App() {
       <Routes>
         <Route path="/"></Route>
         <Route path="/generate" element={<WorkoutGenerator />} />
-        <Route path="/workouts" element={<WorkoutList workouts={workouts} setDataFetched={setDataFetched}/>} />
+        <Route
+          path="/workouts"
+          element={
+            <WorkoutList workouts={workouts} setDataFetched={setDataFetched} />
+          }
+        />
+        <Route path="/schedule" element={<Schedule />} />
       </Routes>
     </>
   );
