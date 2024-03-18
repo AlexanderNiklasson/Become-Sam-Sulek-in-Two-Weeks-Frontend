@@ -22,12 +22,8 @@ function App() {
       <Routes>
         <Route path="/"></Route>
         <Route path="/generate" element={<WorkoutGenerator />} />
-        <Route
-          path="/workouts"
-          element={
-            <WorkoutList workouts={workouts} setDataFetched={setDataFetched} />
-          }
-        />
+        <Route path="/workouts" element={<WorkoutList workouts={workouts} setDataFetched={setDataFetched} />} />
+        <Route path="/workouts/:level" element={<WorkoutList workouts={workouts} setDataFetched={setDataFetched} />} />
         <Route path="/schedule" element={<Schedule />} />
       </Routes>
     </>
