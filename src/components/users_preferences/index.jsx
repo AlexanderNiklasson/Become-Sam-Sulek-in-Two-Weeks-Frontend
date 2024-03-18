@@ -16,7 +16,7 @@ export default function UsersPreferences() {
   };
 
   return (
-    <div className="fixed top-0 right-0 h-screen overflow-y-auto bg-white shadow-md rounded-lg">
+    <div className="fixed top-50 right-5 h-screen overflow-y-auto bg-white shadow-md rounded-lg">
       <div className="p-4">
         <h2 className="text-xl font-semibold mb-4">Users Preferences</h2>
         <form>

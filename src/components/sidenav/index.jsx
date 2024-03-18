@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export function SideNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,11 +13,10 @@ export function SideNav() {
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2"
             />
-            <a
-              href="/"
+            <Link to={"/"}
               className="underline text-customPurple hover:no-underline ">
               Home
-            </a>
+            </Link>
           </li>
           <li className="flex">
             <img
@@ -24,11 +24,10 @@ export function SideNav() {
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
-            <a
-              href="/"
+            <Link to={"/"}
               className="underline text-customPurple hover:no-underline ">
               Schedule
-            </a>
+            </Link>
           </li>
           <li className="flex">
             <img
@@ -36,11 +35,10 @@ export function SideNav() {
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
-            <a
-              href="/"
+            <Link to={"workouts"}
               className="underline text-customPurple hover:no-underline">
               Workouts
-            </a>
+            </Link>
           </li>
           <li>
             <div className="flex">
@@ -86,11 +84,10 @@ export function SideNav() {
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
-            <a
-              href="/"
+            <Link to={"/"}
               className="text-customPurple underline hover:no-underline">
               Users
-            </a>
+            </Link>
           </li>
           <li className="flex">
             <img
@@ -98,11 +95,10 @@ export function SideNav() {
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
-            <a
-              href="/"
+            <Link to={"/"}
               className="text-customPurple underline hover:no-underline">
               Highscore
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
