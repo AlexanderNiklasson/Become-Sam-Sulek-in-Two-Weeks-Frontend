@@ -4,7 +4,7 @@ const dummyWorkouts = [
 		"intId": 20,
 		"name": "Alternating Renegade Row",
 		"force": "pull",
-		"level": "expert",
+		"level": "beginner",
 		"mechanic": "compound",
 		"equipment": "kettlebells",
 		"primaryMuscles": [
@@ -33,7 +33,7 @@ const dummyWorkouts = [
 		"intId": 29,
 		"name": "Atlas Stones",
 		"force": "pull",
-		"level": "expert",
+		"level": "beginner",
 		"mechanic": "compound",
 		"equipment": "other",
 		"primaryMuscles": [
@@ -68,7 +68,7 @@ const dummyWorkouts = [
 		"intId": 43,
 		"name": "Barbell Ab Rollout - On Knees",
 		"force": "pull",
-		"level": "expert",
+		"level": "beginner",
 		"mechanic": "compound",
 		"equipment": "barbell",
 		"primaryMuscles": [
@@ -95,7 +95,7 @@ const dummyWorkouts = [
 		"intId": 65,
 		"name": "Barbell Squat To A Bench",
 		"force": "push",
-		"level": "expert",
+		"level": "intermediate",
 		"mechanic": "compound",
 		"equipment": "barbell",
 		"primaryMuscles": [
@@ -128,7 +128,7 @@ const dummyWorkouts = [
 		"intId": 70,
 		"name": "Behind Head Chest Stretch",
 		"force": "static",
-		"level": "expert",
+		"level": "intermediate",
 		"mechanic": "isolation",
 		"equipment": "other",
 		"primaryMuscles": [
@@ -154,7 +154,7 @@ const dummyWorkouts = [
 		"intId": 75,
 		"name": "Bench Press with Chains",
 		"force": "push",
-		"level": "expert",
+		"level": "intermediate",
 		"mechanic": "compound",
 		"equipment": "barbell",
 		"primaryMuscles": [

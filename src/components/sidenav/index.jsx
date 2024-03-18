@@ -65,7 +65,7 @@ export function SideNav() {
 
             {isOpen && (
               <ul className="space-y-4 ml-4 mt-5">
-                {["Easy", "Intermediate", "Expert"].map((item, index) => (
+                {["Beginner", "Intermediate", "Expert"].map((item, index) => (
                   <li key={index}>
                     <a
                       href="/"

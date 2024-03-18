@@ -109,8 +109,15 @@ export default function WorkoutGenerator() {
             <button
               className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
-              style={{ backgroundColor: "#81689D" }}>
-              Submit
+              style={{ backgroundColor: "white" }}
+            >
+              <div className="flex items-center">
+                <img
+                  src="../src/assets/done.png"
+                  alt="logo"
+                  className="h-10 w-10 text-customPurple animate-pulse"
+                />
+              </div>
             </button>
           </form>
         </div>
