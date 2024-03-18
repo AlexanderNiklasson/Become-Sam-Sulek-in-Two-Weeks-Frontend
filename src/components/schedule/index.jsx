@@ -5,6 +5,7 @@ export function Schedule() {
   const [isLoaded, setIsLoaded] = useState(false);
   const dragItem = useRef(null);
   const dragOverItem = useRef(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     setIsLoaded(false);
@@ -17,6 +18,17 @@ export function Schedule() {
         setIsLoaded(true);
       });
   }, []);
+
+  useEffect(() => {
+    if (showModal) {
+      const timeoutId = setTimeout(() => {
+        setShowModal(false);
+      }, 1000); // Adjust the time interval as needed (in milliseconds)
+
+      // Clear the timeout when the component unmounts or when showModal becomes false
+      return () => clearTimeout(timeoutId);
+    }
+  }, [showModal]);
 
   const handleSort = () => {
     if (dragItem.current !== dragOverItem.current) {
@@ -46,10 +58,28 @@ export function Schedule() {
     }
   };
 
+  const submitChanges = () => {
+    fetch("http://localhost:4000/schedule/1", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(days),
+    });
+    setShowModal(true);
+  };
+
   if (!isLoaded) return <h1>Loading...</h1>;
 
   return (
     <div className="grid grid-cols-3 gap-1 ml-[256px] p-10 w-[70%]">
+      {showModal && (
+        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center">
+          <div className="bg-white p-10 rounded-lg shadow-md transition-opacity duration-100">
+            <h1>Saved changes</h1>
+          </div>
+        </div>
+      )}
       {days.week.map((day, index) => (
         <div
           key={`day-${index}`}
@@ -74,8 +104,12 @@ export function Schedule() {
           ))}
         </div>
       ))}
-      <div>
-        <button className="border-2 p-5">Save</button>
+      <div className="flex justify-center">
+        <button
+          className="border-2  h-[50px] w-[120px] mt-20 bg-customPurple text-white  text-xl rounded hover:bg-purple-800"
+          onClick={submitChanges}>
+          Save
+        </button>
       </div>
     </div>
   );

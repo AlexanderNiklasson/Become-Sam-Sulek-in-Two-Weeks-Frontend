@@ -1,6 +1,6 @@
-import WorkoutItem from "./workout_item/index";
+import { WorkoutItem } from "./workout_item/index";
 
-export default function WorkoutList({ workouts }) {
+export function WorkoutList({ workouts }) {
   return (
     <main className="flex-1 flex">
       <div className="w-64 h-screen overflow-y-auto border-r border-gray-300">

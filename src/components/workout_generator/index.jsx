@@ -1,48 +1,48 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import Home from "../home/index.jsx"
+import Home from "../home/index.jsx";
 
 export default function WorkoutGenerator() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-      type: "",
-      level: "",
-      duration: 0,
-      exclude: ""
+    type: "",
+    level: "",
+    duration: 0,
+    exclude: "",
   });
 
   const handleChange = (event) => {
-      const { name, value } = event.target;
-      setFormData((data) => ({ ...data, [name]: value }));
-  }
+    const { name, value } = event.target;
+    setFormData((data) => ({ ...data, [name]: value }));
+  };
 
   const handleSubmit = (event) => {
-      event.preventDefault();
+    event.preventDefault();
 
-      console.log("Pre-test log before attempting post request")
-      fetch(`www.samsulek.com/generate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+    console.log("Pre-test log before attempting post request");
+    fetch(`www.samsulek.com/generate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     }).then((response) => {
-        if (response.ok) {
-            console.log("Mid-test log to log if POST response was OK");
-            //setDataFetched(false);
-            setFormData({
-                type: "",
-                level: "",
-                duration: 0,
-                exclude: ""
-            });
-        }
+      if (response.ok) {
+        console.log("Mid-test log to log if POST response was OK");
+        //setDataFetched(false);
+        setFormData({
+          type: "",
+          level: "",
+          duration: 0,
+          exclude: "",
+        });
+      }
     });
-  }
+  };
 
   return (
     <>
       <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden">
         <div className="p-4">
-          <Home/>
+          <Home />
           <h2 className="text-xl font-semibold mb-4">Generate Workout</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -58,7 +58,6 @@ export default function WorkoutGenerator() {
                 value={formData.type}
                 onChange={handleChange}
                 placeholder="Cardio, push or press?"
-                
               />
             </div>
             <div className="mb-4">
@@ -110,8 +109,7 @@ export default function WorkoutGenerator() {
             <button
               className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
-              style={{ backgroundColor: "#81689D" }}
-            >
+              style={{ backgroundColor: "#81689D" }}>
               Submit
             </button>
           </form>
