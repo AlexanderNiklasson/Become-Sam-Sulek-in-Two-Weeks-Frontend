@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function SideNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
   return (
     <div className="fixed top-[100px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500 ">
       <div>
@@ -15,7 +17,8 @@ export function SideNav() {
             />
             <Link
               to={"/"}
-              className="underline text-customPurple hover:no-underline ">
+              className="underline text-customPurple hover:no-underline "
+            >
               Home
             </Link>
           </li>
@@ -27,7 +30,8 @@ export function SideNav() {
             />
             <Link
               to={"/schedule"}
-              className="underline text-customPurple hover:no-underline ">
+              className="underline text-customPurple hover:no-underline "
+            >
               Schedule
             </Link>
           </li>
@@ -39,7 +43,8 @@ export function SideNav() {
             />
             <Link
               to={"workouts"}
-              className="underline text-customPurple hover:no-underline">
+              className="underline text-customPurple hover:no-underline"
+            >
               Workouts
             </Link>
           </li>
@@ -50,7 +55,8 @@ export function SideNav() {
                 onKeyDown={() => {}}
                 className={`underline hover:no-underline text-customPurple ${
                   isOpen ? "text-gray-500" : "text-customPurple"
-                }`}>
+                }`}
+              >
                 Difficulty
               </button>
 
@@ -67,11 +73,12 @@ export function SideNav() {
               <ul className="space-y-4 ml-4 mt-5">
                 {["Beginner", "Intermediate", "Expert"].map((item, index) => (
                   <li key={index}>
-                    <a
-                      href="/"
-                      className="text-customPurple underline hover:no-underline">
+                    <Link
+                      to={`/workouts/${item.toLowerCase()}`} // Pass level as a parameter
+                      className="text-customPurple underline hover:no-underline"
+                    >
                       {item}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -89,7 +96,8 @@ export function SideNav() {
             />
             <Link
               to={"/"}
-              className="text-customPurple underline hover:no-underline">
+              className="text-customPurple underline hover:no-underline"
+            >
               Users
             </Link>
           </li>
@@ -101,7 +109,8 @@ export function SideNav() {
             />
             <Link
               to={"/"}
-              className="text-customPurple underline hover:no-underline">
+              className="text-customPurple underline hover:no-underline"
+            >
               Highscore
             </Link>
           </li>

@@ -15,7 +15,7 @@ export function WorkoutItem({ workout }) {
         <p className="text-gray-700 mb-2">
           <strong>Primary Muscles:</strong> {workout.primaryMuscles.join(", ")}
         </p>
-        <div className="flex items-center">
+        <div className="flex items-center animate-pulse">
           <a
             href={`/workout/${workout.id}`}
             className="text-purple-500 hover:underline"
@@ -25,7 +25,7 @@ export function WorkoutItem({ workout }) {
           <img
             src="../src/assets/view-details.png"
             alt="logo"
-            className="h-12 w-12 text-customPurple mr-5 ml-5 animate-pulse"
+            className="h-6 w-6 text-customPurple mr-5 ml-2"
           />
         </div>
       </div>
