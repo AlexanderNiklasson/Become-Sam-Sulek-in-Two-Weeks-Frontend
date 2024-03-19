@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router";
 import "./App.css";
 import UsersPreferences from "./components/users_preferences";
@@ -10,52 +10,79 @@ import { WorkoutList } from "./components/workout_list";
 import dummyWorkouts from "./data";
 
 function App() {
-  const [workouts, setWorkouts] = useState(dummyWorkouts);
+  const [workouts, setWorkouts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 2;
+  const perPage = 9;
   const [usersPreferences, setUsersPreferences] = useState({});
   const [dataFetched, setDataFetched] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [activeUser, setActiveUser] = useState({
+    id: 1,
+  });
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  return (
-    <>
-      <Header />
-      <SideNav />
-      <UsersPreferences />
-      <Routes>
-        <Route path="/"></Route>
-        <Route path="/generate" element={<WorkoutGenerator />} />
-        <Route
-          path="/workouts"
-          element={
-            <WorkoutList
-              workouts={workouts}
-              currentPage={currentPage}
-              perPage={perPage}
-              onPageChange={handlePageChange}
-              setDataFetched={setDataFetched}
-            />
-          }
-        />
-        <Route
-          path="/workouts/:level"
-          element={
-            <WorkoutList
-              workouts={workouts}
-              currentPage={currentPage}
-              perPage={perPage}
-              onPageChange={handlePageChange}
-              setDataFetched={setDataFetched}
-            />
-          }
-        />
-        <Route path="/schedule" element={<Schedule />} />
-      </Routes>
-    </>
-  );
+  useEffect(() => {
+    if (!dataFetched) {
+      fetch("http://localhost:4000/exercise")
+        .then((response) => response.json())
+        .then((data) => {
+          setWorkouts(data);
+          setDataFetched(true);
+        });
+    }
+  }, [dataFetched]);
+
+  
+  if (!dataFetched) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <>
+        <Header showModal={showModal} setShowModal={setShowModal} />
+        <SideNav showModal={showModal} setShowModal={setShowModal} />
+        <UsersPreferences showModal={showModal} setShowModal={setShowModal} />
+        <Routes>
+          <Route path="/"></Route>
+          <Route path="/generate" element={<WorkoutGenerator />} />
+          <Route
+            path="/workouts"
+            element={
+              <WorkoutList
+                workouts={workouts}
+                currentPage={currentPage}
+                perPage={perPage}
+                onPageChange={handlePageChange}
+                setDataFetched={setDataFetched}
+                showModal={showModal}
+                setShowModal={setShowModal}
+              />
+            }
+          />
+          <Route
+            path="/workouts/:level"
+            element={
+              <WorkoutList
+                workouts={workouts}
+                currentPage={currentPage}
+                perPage={perPage}
+                onPageChange={handlePageChange}
+                setDataFetched={setDataFetched}
+                showModal={showModal}
+                setShowModal={setShowModal}
+              />
+            }
+          />
+          <Route
+            path="/schedule"
+            element={<Schedule activeUser={activeUser} />}
+          />
+        </Routes>
+      </>
+    );
+  }
 }
 
 export default App;
