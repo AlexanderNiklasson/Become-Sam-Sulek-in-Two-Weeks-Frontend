@@ -6,6 +6,7 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
     `https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${workout.images[0]}`,
     `https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${workout.images[1]}`,
   ]);
+  const [thisShowModal, setThisShowModal] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -16,7 +17,7 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
   }, []);
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md mb-4 hover:text-customPurple hover:border-gray-700 border-transparent border-[1px] border-customPurple flex items-center">
-      {showModal && (
+      {thisShowModal && (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-[3]">
           <div className="fixed top-0 left-0 w-full h-full bg-black opacity-10"></div>{" "}
           {/* Semi-transparent overlay */}
@@ -25,7 +26,7 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
               <img
                 src={`${images[currentImageIndex]}`}
                 alt="logo"
-                className="h-[350px]  aspect-auto text-customPurple mr-5 ml-2 border-2 border-black"
+                className="h-[350px]  aspect-auto text-customPurple  border-2 border-black mx-auto"
               />
               <h1 className="text-3xl mt-3 text-customPurple mb-2">
                 {workout.name}
@@ -40,7 +41,10 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
               ))}
 
               <button
-                onClick={() => setShowModal(false)}
+                onClick={() => {
+                  setShowModal(false);
+                  setThisShowModal(false);
+                }}
                 className="border-2 h-[50px] w-[120px]  bg-customPurple text-white text-xl rounded hover:bg-purple-800">
                 Close
               </button>
@@ -65,7 +69,10 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
         </p>
         <div className="flex items-center animate-pulse">
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              setShowModal(true);
+              setThisShowModal(true);
+            }}
             className="text-purple-500 hover:underline">
             View Details
           </button>

@@ -7,7 +7,8 @@ import { Header } from "./components/header";
 import { SideNav } from "./components/sidenav";
 import { Schedule } from "./components/schedule";
 import { WorkoutList } from "./components/workout_list";
-import dummyWorkouts from "./data";
+import { Dashboard } from "./components/dashboard";
+import { Footer } from "./components/footer";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
@@ -16,7 +17,7 @@ function App() {
   const [usersPreferences, setUsersPreferences] = useState({});
   const [dataFetched, setDataFetched] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [activeUser, setActiveUser] = useState({
+  const [activeUser] = useState({
     id: 1,
   });
 
@@ -35,7 +36,6 @@ function App() {
     }
   }, [dataFetched]);
 
-  
   if (!dataFetched) {
     return <div>Loading...</div>;
   } else {
@@ -45,7 +45,7 @@ function App() {
         <SideNav showModal={showModal} setShowModal={setShowModal} />
         <UsersPreferences showModal={showModal} setShowModal={setShowModal} />
         <Routes>
-          <Route path="/"></Route>
+          <Route path="/" element={<Dashboard />}></Route>
           <Route path="/generate" element={<WorkoutGenerator />} />
           <Route
             path="/workouts"
