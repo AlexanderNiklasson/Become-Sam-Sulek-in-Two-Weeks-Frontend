@@ -10,8 +10,12 @@ import { WorkoutList } from "./components/workout_list";
 import { Dashboard } from "./components/dashboard";
 import { Footer } from "./components/footer";
 import ComplexityTable from "./components/complexity_table";
+import User from "./components/users";
+import UsersTable from "./components/users_table";
+
 import { Tabs } from "@mantine/core";
 import { WorkoutCreator } from "./components/workout-creator";
+
 function App() {
   const [workouts, setWorkouts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,6 +23,7 @@ function App() {
   const [usersPreferences, setUsersPreferences] = useState({});
   const [dataFetched, setDataFetched] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [users, setUsers] = useState(null);
   const [activeUser] = useState({
     id: 1,
   });
@@ -29,11 +34,21 @@ function App() {
 
   useEffect(() => {
     if (!dataFetched) {
-      fetch("http://localhost:4000/exercise")
-        .then((response) => response.json())
-        .then((data) => {
-          setWorkouts(data);
+      Promise.all([
+        fetch("http://localhost:4000/exercise").then((response) =>
+          response.json()
+        ),
+        fetch("http://localhost:4000/users").then((response) =>
+          response.json()
+        ),
+      ])
+        .then(([workoutsData, usersData]) => {
+          setWorkouts(workoutsData);
+          setUsers(usersData);
           setDataFetched(true);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
         });
     }
   }, [dataFetched]);

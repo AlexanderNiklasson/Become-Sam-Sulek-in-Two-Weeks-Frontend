@@ -26,6 +26,11 @@ export function Header({ showModal }) {
             className="bg-customPurple text-white p-4 text-xl rounded hover:bg-purple-800">
             Generate
           </button>
+          <button
+            onClick={() => navigate("/users/id")}
+            className="bg-customPurple text-white p-4 text-xl ml-2 rounded hover:bg-purple-800">
+            User Profile
+          </button>
         </div>
       </div>
     </header>
