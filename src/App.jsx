@@ -9,6 +9,8 @@ import { Schedule } from "./components/schedule";
 import { WorkoutList } from "./components/workout_list";
 import { Dashboard } from "./components/dashboard";
 import { Footer } from "./components/footer";
+import { Tabs } from "@mantine/core";
+import { WorkoutCreator } from "./components/workout-creator";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
@@ -46,7 +48,10 @@ function App() {
         <UsersPreferences showModal={showModal} setShowModal={setShowModal} />
         <Routes>
           <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/generate" element={<WorkoutGenerator />} />
+          <Route
+            path="/generate"
+            element={<WorkoutCreator workouts={workouts} />}
+          />
           <Route
             path="/workouts"
             element={
