@@ -107,7 +107,7 @@ export function SideNav({ showModal }) {
               className="h-6 w-6 text-customPurple mr-2 "
             />
             <Link
-              to={"/"}
+              to={"/users"}
               className="text-customPurple underline hover:no-underline">
               Users
             </Link>
