@@ -50,7 +50,9 @@ function App() {
           <Route path="/" element={<Dashboard />}></Route>
           <Route
             path="/generate"
-            element={<WorkoutCreator workouts={workouts} />}
+            element={
+              <WorkoutCreator workouts={workouts} activeUser={activeUser} />
+            }
           />
           <Route
             path="/workouts"
@@ -84,7 +86,10 @@ function App() {
             path="/schedule"
             element={<Schedule activeUser={activeUser} />}
           />
-          <Route path="/complexity/table" element={<ComplexityTable workouts={workouts}/>} />
+          <Route
+            path="/complexity/table"
+            element={<ComplexityTable workouts={workouts} />}
+          />
         </Routes>
       </>
     );
