@@ -30,10 +30,16 @@ export function WorkoutItem({ workout }) {
         </div>
       </div>
       <img
+            src="../src/assets/bee.png"
+            alt="logo"
+            className="h-64 w-64 text-customPurple mr-5 ml-2"
+          />
+      {/* Uncomment this below to set the associated correct picture to the DOM */}
+      {/* <img
         src={`/${workout.images[0]}`}
         alt={workout.name}
         className="w-32 h-32 object-cover mr-5"
-      />
+      /> */}
     </div>
   );
 }
