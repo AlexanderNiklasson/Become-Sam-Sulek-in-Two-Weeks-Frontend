@@ -119,9 +119,9 @@ export function SideNav({ showModal }) {
               className="h-6 w-6 text-customPurple mr-2 "
             />
             <Link
-              to={"/"}
+              to={"/complexity/table"}
               className="text-customPurple underline hover:no-underline">
-              Highscore
+              Complexity Rankings
             </Link>
           </li>
         </ul>

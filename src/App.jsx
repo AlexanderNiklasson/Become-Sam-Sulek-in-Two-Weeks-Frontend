@@ -9,9 +9,9 @@ import { Schedule } from "./components/schedule";
 import { WorkoutList } from "./components/workout_list";
 import { Dashboard } from "./components/dashboard";
 import { Footer } from "./components/footer";
+import ComplexityTable from "./components/complexity_table";
 import { Tabs } from "@mantine/core";
 import { WorkoutCreator } from "./components/workout-creator";
-
 function App() {
   const [workouts, setWorkouts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -84,6 +84,7 @@ function App() {
             path="/schedule"
             element={<Schedule activeUser={activeUser} />}
           />
+          <Route path="/complexity/table" element={<ComplexityTable workouts={workouts}/>} />
         </Routes>
       </>
     );

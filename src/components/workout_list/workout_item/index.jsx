@@ -67,6 +67,9 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
         <p className="text-gray-700 mb-2">
           <strong>Primary Muscles:</strong> {workout.primaryMuscles.join(", ")}
         </p>
+        <p className="text-gray-700 mb-2">
+          <strong>Complexity:</strong> {workout.complexity}
+        </p>
         <div className="flex items-center animate-pulse">
           <button
             onClick={() => {
