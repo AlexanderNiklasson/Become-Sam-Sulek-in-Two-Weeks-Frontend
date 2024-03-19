@@ -9,6 +9,7 @@ import { Schedule } from "./components/schedule";
 import { WorkoutList } from "./components/workout_list";
 import { Dashboard } from "./components/dashboard";
 import { Footer } from "./components/footer";
+import ComplexityTable from "./components/complexity_table";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
@@ -79,6 +80,7 @@ function App() {
             path="/schedule"
             element={<Schedule activeUser={activeUser} />}
           />
+          <Route path="/complexity/table" element={<ComplexityTable workouts={workouts}/>} />
         </Routes>
       </>
     );
