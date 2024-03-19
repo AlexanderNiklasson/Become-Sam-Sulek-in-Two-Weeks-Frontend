@@ -5,8 +5,25 @@ export function SideNav() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
+  // Function to handle mouse enter event
+  const handleMouseEnter = () => {
+    // Prevent scrolling
+    document.body.style.overflow = 'hidden';
+  };
+
+  // Function to handle mouse leave event
+  const handleMouseLeave = () => {
+    // Re-enable scrolling
+    document.body.style.overflow = '';
+  };
+
+
   return (
-    <div className="fixed top-[100px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500 ">
+    <div 
+      className="fixed top-[100px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      >
       <div>
         <ul className="space-y-4 min-h-[280px] ml-3">
           <li className="flex">
