@@ -1,29 +1,29 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export function SideNav() {
+export function SideNav({ showModal }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   // Function to handle mouse enter event
   const handleMouseEnter = () => {
     // Prevent scrolling
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   };
 
   // Function to handle mouse leave event
   const handleMouseLeave = () => {
     // Re-enable scrolling
-    document.body.style.overflow = '';
+    document.body.style.overflow = "";
   };
 
-
   return (
-    <div 
-      className="fixed top-[100px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500"
+    <div
+      className={`fixed top-[100px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500 ${
+        showModal ? "z-[-1]" : "z-[1]"
+      }`}
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      >
+      onMouseLeave={handleMouseLeave}>
       <div>
         <ul className="space-y-4 min-h-[280px] ml-3">
           <li className="flex">
@@ -34,8 +34,7 @@ export function SideNav() {
             />
             <Link
               to={"/"}
-              className="underline text-customPurple hover:no-underline "
-            >
+              className="underline text-customPurple hover:no-underline ">
               Home
             </Link>
           </li>
@@ -47,8 +46,7 @@ export function SideNav() {
             />
             <Link
               to={"/schedule"}
-              className="underline text-customPurple hover:no-underline "
-            >
+              className="underline text-customPurple hover:no-underline ">
               Schedule
             </Link>
           </li>
@@ -60,8 +58,7 @@ export function SideNav() {
             />
             <Link
               to={"workouts"}
-              className="underline text-customPurple hover:no-underline"
-            >
+              className="underline text-customPurple hover:no-underline">
               Workouts
             </Link>
           </li>
@@ -72,8 +69,7 @@ export function SideNav() {
                 onKeyDown={() => {}}
                 className={`underline hover:no-underline text-customPurple ${
                   isOpen ? "text-gray-500" : "text-customPurple"
-                }`}
-              >
+                }`}>
                 Difficulty
               </button>
 
@@ -92,8 +88,7 @@ export function SideNav() {
                   <li key={index}>
                     <Link
                       to={`/workouts/${item.toLowerCase()}`} // Pass level as a parameter
-                      className="text-customPurple underline hover:no-underline"
-                    >
+                      className="text-customPurple underline hover:no-underline">
                       {item}
                     </Link>
                   </li>
@@ -113,8 +108,7 @@ export function SideNav() {
             />
             <Link
               to={"/"}
-              className="text-customPurple underline hover:no-underline"
-            >
+              className="text-customPurple underline hover:no-underline">
               Users
             </Link>
           </li>
@@ -126,8 +120,7 @@ export function SideNav() {
             />
             <Link
               to={"/"}
-              className="text-customPurple underline hover:no-underline"
-            >
+              className="text-customPurple underline hover:no-underline">
               Highscore
             </Link>
           </li>

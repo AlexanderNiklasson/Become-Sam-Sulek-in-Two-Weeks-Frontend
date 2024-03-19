@@ -1,6 +1,54 @@
-export function WorkoutItem({ workout }) {
+import { useState, useEffect } from "react";
+
+export function WorkoutItem({ workout, showModal, setShowModal }) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [images, setImages] = useState([
+    `https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${workout.images[0]}`,
+    `https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${workout.images[1]}`,
+  ]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-md mb-4 hover:text-customPurple hover:border border-customPurple flex items-center">
+    <div className="bg-white rounded-lg overflow-hidden shadow-md mb-4 hover:text-customPurple hover:border-gray-700 border-transparent border-[1px] border-customPurple flex items-center">
+      {showModal && (
+        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-[3]">
+          <div className="fixed top-0 left-0 w-full h-full bg-black opacity-10"></div>{" "}
+          {/* Semi-transparent overlay */}
+          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center  overflow-y-auto">
+            <div className="w-2/4 h-3/4 bg-white p-10 rounded-lg shadow-md max-w-full max-h-full overflow-auto">
+              <img
+                src={`${images[currentImageIndex]}`}
+                alt="logo"
+                className="h-[350px]  aspect-auto text-customPurple mr-5 ml-2 border-2 border-black"
+              />
+              <h1 className="text-3xl mt-3 text-customPurple mb-2">
+                {workout.name}
+              </h1>
+              {workout.instructions.map((instruction, index) => (
+                <>
+                  <p>
+                    {index + 1}. {instruction}
+                  </p>
+                  <br />
+                </>
+              ))}
+
+              <button
+                onClick={() => setShowModal(false)}
+                className="border-2 h-[50px] w-[120px]  bg-customPurple text-white text-xl rounded hover:bg-purple-800">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="p-4 flex-1">
         <h2 className="text-xl font-semibold mb-2">{workout.name}</h2>
         <p className="text-gray-700 mb-2">
@@ -16,12 +64,11 @@ export function WorkoutItem({ workout }) {
           <strong>Primary Muscles:</strong> {workout.primaryMuscles.join(", ")}
         </p>
         <div className="flex items-center animate-pulse">
-          <a
-            href={`/workout/${workout.id}`}
-            className="text-purple-500 hover:underline"
-          >
+          <button
+            onClick={() => setShowModal(true)}
+            className="text-purple-500 hover:underline">
             View Details
-          </a>
+          </button>
           <img
             src="../src/assets/view-details.png"
             alt="logo"
@@ -30,10 +77,11 @@ export function WorkoutItem({ workout }) {
         </div>
       </div>
       <img
-            src="../src/assets/bee.png"
-            alt="logo"
-            className="h-64 w-64 text-customPurple mr-5 ml-2"
-          />
+        src={`${images[currentImageIndex]}`}
+        alt="logo"
+        className="h-40 w-40 text-customPurple mr-5 ml-2 border-2 border-black"
+      />
+
       {/* Uncomment this below to set the associated correct picture to the DOM */}
       {/* <img
         src={`/${workout.images[0]}`}

@@ -1,15 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 
-export function Schedule() {
+export function Schedule({ activeUser }) {
   const [days, setDays] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const dragItem = useRef(null);
   const dragOverItem = useRef(null);
   const [showModal, setShowModal] = useState(false);
+  
 
   useEffect(() => {
     setIsLoaded(false);
-    fetch("http://localhost:4000/schedule/1")
+    fetch(`http://localhost:4000/schedule/${activeUser.id}`)
       .then((res) => res.json())
       .then((data) => {
         setDays(data);
