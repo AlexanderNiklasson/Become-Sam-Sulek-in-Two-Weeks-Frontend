@@ -47,7 +47,7 @@ export function SideNav({ showModal }) {
             <Link
               to={"/schedule"}
               className="underline text-customPurple hover:no-underline ">
-              Schedule
+              <code>Schedule</code>
             </Link>
           </li>
           <li className="flex">

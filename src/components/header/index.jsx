@@ -17,7 +17,7 @@ export function Header({ showModal }) {
           />
 
           <h1 className="text-3xl font-extrabold text-transparent bg-gradient-to-r from-customPurple to-purple-600 bg-clip-text animate-pulse">
-            <code>Become Sam Sulek In Two Weeks!</code>
+            Become Sam Sulek In Two Weeks!
           </h1>
         </div>
         <div>

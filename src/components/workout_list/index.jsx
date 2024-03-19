@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { WorkoutItem } from "./workout_item/index";
+import { Pagination } from "@mantine/core";
 
 export function WorkoutList({
   workouts,
@@ -11,8 +12,14 @@ export function WorkoutList({
 }) {
   const { level } = useParams();
 
+  const filteredWorkouts = workouts.filter(
+    (workout) => !level || workout.level.toLowerCase() === level.toLowerCase()
+  );
+
   const startIndex = (currentPage - 1) * perPage;
-  const endIndex = startIndex + perPage;
+  const endIndex = Math.min(startIndex + perPage, filteredWorkouts.length);
+
+  const paginatedWorkouts = filteredWorkouts.slice(startIndex, endIndex);
 
   return (
     <div>
@@ -27,47 +34,27 @@ export function WorkoutList({
           {/* Workout List */}
           <div className="p-5 h-screen overflow-y-auto ">
             <div className="flex justify-center ">
-              <button
-                onClick={() => onPageChange(currentPage - 1)}
-                disabled={currentPage === 1}>
-                <img
-                  src="../src/assets/left-arrow.png"
-                  alt="logo"
-                  className="h-12 w-12 text-customPurple mr-2 ml-2 mb-2 opacity-75 hover:opacity-100 transition-opacity"
-                />
-              </button>
-              <div className="bg-white px-2 py-3 rounded-md shadow-sm ">
-                {currentPage}
-              </div>
-              <button
-                onClick={() => onPageChange(currentPage + 1)}
-                disabled={endIndex >= workouts.length}>
-                <img
-                  src="../src/assets/right-arrow.png"
-                  alt="logo"
-                  className="h-12 w-12 text-customPurple mr-2 ml-2 mb-2 opacity-75 hover:opacity-100 transition-opacity"
-                />
-              </button>
+              <Pagination
+                total={Math.ceil(filteredWorkouts.length / perPage)}
+                value={currentPage}
+                onChange={onPageChange}
+                color="#81689D"
+                className="mb-5"
+              />
             </div>
-            {workouts && workouts.length > 0 ? (
-              workouts
-                .filter(
-                  (workout) =>
-                    !level ||
-                    workout.level.toLowerCase() === level.toLowerCase()
-                )
-                .slice(startIndex, endIndex)
-                .map((workout) => (
-                  <WorkoutItem
-                    key={workout.id}
-                    workout={workout}
-                    showModal={showModal}
-                    setShowModal={setShowModal}
-                  />
-                ))
+            {paginatedWorkouts.length > 0 ? (
+              paginatedWorkouts.map((workout) => (
+                <WorkoutItem
+                  key={workout.id}
+                  workout={workout}
+                  showModal={showModal}
+                  setShowModal={setShowModal}
+                />
+              ))
             ) : (
               <p className="text-gray-700">No workouts available</p>
             )}
+            <div className="h-[100px] bg-white"></div>
           </div>
         </div>
         <div className="w-64 h-screen overflow-y-auto border-l border-gray-300 z-[-100]">
