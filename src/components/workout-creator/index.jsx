@@ -2,6 +2,7 @@ import { Tabs } from "@mantine/core";
 import WorkoutGenerator from "../workout_generator";
 import { Creator } from "./creator";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function WorkoutCreator({ workouts, activeUser }) {
   const [hasSchedule, setHasSchedule] = useState(true);
@@ -21,8 +22,20 @@ export function WorkoutCreator({ workouts, activeUser }) {
   }, [activeUser]);
   if (hasSchedule && isLoaded) {
     return (
-      <div className="w-100">
-        <p>You already have a schedule</p>
+      <div className="w-100 flex justify-center">
+        <div>
+          <h2 className="text-customPurple text-3xl mt-[200px]">
+            You already have a schedule
+          </h2>
+          <h2 className="text-customPurple text-2xl text-center">
+            Here is{" "}
+            <Link
+              className="text-customPink underline hover:text-customLightblue"
+              to="/schedule">
+              your schedule
+            </Link>
+          </h2>
+        </div>
       </div>
     );
   } else if (isLoaded) {

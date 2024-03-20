@@ -19,7 +19,7 @@ export function SideNav({ showModal }) {
 
   return (
     <div
-      className={`fixed top-[100px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500 ${
+      className={`fixed top-[88px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500 ${
         showModal ? "z-[-1]" : "z-[1]"
       }`}
       onMouseEnter={handleMouseEnter}
