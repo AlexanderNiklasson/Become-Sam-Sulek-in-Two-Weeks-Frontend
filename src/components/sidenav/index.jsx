@@ -1,29 +1,20 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { isAuthenticated, logout } from "../../auth";
 
-export function SideNav({ showModal }) {
+export function SideNav({ showModal, handleLogout }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Function to handle mouse enter event
-  const handleMouseEnter = () => {
-    // Prevent scrolling
-    document.body.style.overflow = "hidden";
-  };
-
-  // Function to handle mouse leave event
-  const handleMouseLeave = () => {
-    // Re-enable scrolling
-    document.body.style.overflow = "";
-  };
+  if (!isAuthenticated()) {
+    return <div></div>;
+  }
 
   return (
     <div
       className={`fixed top-[88px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500 ${
         showModal ? "z-[-1]" : "z-[1]"
-      }`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}>
+      }`}>
       <div>
         <ul className="space-y-4 min-h-[280px] ml-3">
           <li className="flex">
@@ -45,7 +36,7 @@ export function SideNav({ showModal }) {
               className="h-6 w-6 text-customPurple mr-2 "
             />
             <Link
-              to={"/schedule"}
+              to={`/schedule/${localStorage.getItem("id")}`}
               className="underline text-customPurple hover:no-underline ">
               <code>Schedule</code>
             </Link>
@@ -123,6 +114,22 @@ export function SideNav({ showModal }) {
               className="text-customPurple underline hover:no-underline">
               Complexity Rankings
             </Link>
+          </li>
+          <li className="flex">
+            <img
+              src="../src/assets/logout.svg"
+              alt="logo"
+              className="h-6 w-6 text-customPurple mr-2 "
+            />
+            <button
+              onClick={() => {
+                logout();
+                handleLogout();
+                navigate("/login");
+              }}
+              className="text-customPurple underline hover:no-underline">
+              Logout
+            </button>
           </li>
         </ul>
       </div>

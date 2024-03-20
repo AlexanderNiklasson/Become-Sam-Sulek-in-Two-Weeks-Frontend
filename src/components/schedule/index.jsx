@@ -1,27 +1,43 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
-export function Schedule({ activeUser }) {
+export function Schedule() {
   const [days, setDays] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const dragItem = useRef(null);
   const dragOverItem = useRef(null);
   const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoaded(false);
-    fetch(`http://localhost:4000/schedule/${activeUser.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setDays(data);
+
+    // Get token from localStorage
+    const token = localStorage.getItem("token");
+
+    // Check if token exists
+    if (token) {
+      fetch(`http://localhost:4000/schedule/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include token in the Authorization header
+        },
       })
-      .finally(() => {
-        setIsLoaded(true);
-      })
-      .catch((error) => {
-        setDays([]);
-      });
-  }, []);
+        .then((res) => res.json())
+        .then((data) => {
+          setDays(data);
+        })
+        .catch((error) => {
+          setDays([]);
+        })
+        .finally(() => {
+          setIsLoaded(true);
+        });
+    } else {
+      // Handle case where token is missing (e.g., redirect to login page)
+    }
+  }, [id]);
 
   useEffect(() => {
     if (showModal) {
@@ -63,14 +79,30 @@ export function Schedule({ activeUser }) {
   };
 
   const submitChanges = () => {
-    fetch("http://localhost:4000/schedule/1", {
+    fetch(`http://localhost:4000/schedule/${localStorage.getItem("id")}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify(days),
     });
+    console.log(days);
+    setModalContent("Schedule saved");
     setShowModal(true);
+  };
+
+  const submitDelete = () => {
+    fetch(`http://localhost:4000/schedule/${localStorage.getItem("id")}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then(() => {
+      setModalContent("Schedule deleted");
+      navigate(`/generate`);
+    });
   };
 
   if (!isLoaded) return <h1>Loading...</h1>;
@@ -81,15 +113,17 @@ export function Schedule({ activeUser }) {
         <h1 className="text-5xl mx-auto text-customPurple">
           No schedule found
         </h1>
-        <h2 className="text-3xl mx-auto text-customPurple">
-          Please{" "}
-          <Link
-            className="text-customPink underline hover:text-customLightblue"
-            to={"/generate"}>
-            generate
-          </Link>
-          &nbsp;one
-        </h2>
+        {id === localStorage.getItem("id") && (
+          <h2 className="text-3xl mx-auto text-customPurple">
+            Please{" "}
+            <Link
+              className="text-customPink underline hover:text-customLightblue"
+              to={"/generate"}>
+              generate
+            </Link>
+            &nbsp;one
+          </h2>
+        )}
       </div>
     );
 
@@ -99,15 +133,17 @@ export function Schedule({ activeUser }) {
         {showModal && (
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center">
             <div className="bg-white p-10 rounded-lg shadow-md transition-opacity duration-100">
-              <h1>Saved changes</h1>
+              <h1>{modalContent}</h1>
             </div>
           </div>
         )}
         {days.week.map((day, index) => (
           <div
             key={`day-${index}`}
-            className={`border-2 border-customPurple p-5 bg-white shadow-md rounded-lg overflow-hidden cursor-move`}
-            draggable
+            className={`border-2 border-customPurple p-5 bg-white shadow-md rounded-lg overflow-hidden ${
+              id === localStorage.getItem("id") ? "cursor-move" : ""
+            }`}
+            draggable={id === localStorage.getItem("id") ? true : false}
             onDragStart={() => (dragItem.current = index)}
             onDragEnd={handleSort}
             onDragEnter={() => (dragOverItem.current = index)}>
@@ -127,13 +163,20 @@ export function Schedule({ activeUser }) {
             ))}
           </div>
         ))}
-        <div className="flex justify-center">
-          <button
-            className="border-2 h-[50px] w-[120px] mt-20 bg-customPurple text-white text-xl rounded hover:bg-purple-800"
-            onClick={submitChanges}>
-            Save
-          </button>
-        </div>
+        {id === localStorage.getItem("id") && (
+          <div className="flex justify-center flex-row mt-5">
+            <button
+              className="border-2 h-[50px] w-[120px] mx-auto bg-customPurple text-white text-xl rounded hover:bg-purple-800"
+              onClick={submitChanges}>
+              Save
+            </button>
+            <button
+              className="border-2 h-[50px] w-[120px] mx-auto bg-customPurple text-white text-xl rounded hover:bg-purple-800"
+              onClick={submitDelete}>
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

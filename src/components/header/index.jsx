@@ -1,8 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../auth";
 
 export function Header({ showModal }) {
   const navigate = useNavigate();
 
+  if (!isAuthenticated) {
+    return <div></div>;
+  }
   return (
     <header
       className={`bg-white p-5 border-b border-gray-500 ${
@@ -27,7 +31,7 @@ export function Header({ showModal }) {
             Generate
           </button>
           <button
-            onClick={() => navigate("/users/id")}
+            onClick={() => navigate(`/users/${localStorage.getItem("id")}`)}
             className="bg-gradient-to-r from-customPink to-customPurple hover:from-customPink hover:to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg ml-2">
             User Profile
           </button>

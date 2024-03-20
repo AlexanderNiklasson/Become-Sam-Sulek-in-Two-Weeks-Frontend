@@ -4,12 +4,17 @@ import { Creator } from "./creator";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export function WorkoutCreator({ workouts, activeUser }) {
+export function WorkoutCreator({ workouts }) {
   const [hasSchedule, setHasSchedule] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
+    const token = localStorage.getItem("token");
     if (isLoaded) return;
-    fetch(`http://localhost:4000/schedule/${activeUser.id}`)
+    fetch(`http://localhost:4000/schedule/${localStorage.getItem("id")}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Include token in the Authorization header
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setHasSchedule(data !== null);
@@ -19,7 +24,7 @@ export function WorkoutCreator({ workouts, activeUser }) {
         setHasSchedule(false);
         setIsLoaded(true);
       });
-  }, [activeUser]);
+  }, [isLoaded]);
   if (hasSchedule && isLoaded) {
     return (
       <div className="w-100 flex justify-center">
@@ -31,7 +36,7 @@ export function WorkoutCreator({ workouts, activeUser }) {
             Here is{" "}
             <Link
               className="text-customPink underline hover:text-customLightblue"
-              to="/schedule">
+              to={`/schedule/${localStorage.getItem("id")}`}>
               your schedule
             </Link>
           </h2>
@@ -53,7 +58,7 @@ export function WorkoutCreator({ workouts, activeUser }) {
             <WorkoutGenerator />
           </Tabs.Panel>
           <Tabs.Panel value="Custom">
-            <Creator workouts={workouts} activeUser={activeUser} />
+            <Creator workouts={workouts} />
           </Tabs.Panel>
         </Tabs>
       </div>

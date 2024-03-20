@@ -79,21 +79,20 @@ export function Creator({ workouts, activeUser }) {
     });
 
     const requestBody = {
-      name: `${activeUser.id}'s schedule`,
-      ownerId: activeUser.id,
+      name: `${localStorage.getItem("id")}'s schedule`,
+      ownerId: localStorage.getItem("id"),
       ids: ids,
     };
-
-    console.log("Request Body:", JSON.stringify(requestBody)); // Log the body
 
     fetch("http://localhost:4000/schedule", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify(requestBody),
     }).then(() => {
-      navigate("/schedule");
+      navigate(`/schedule/${localStorage.getItem("id")}`);
     });
   };
   return (
