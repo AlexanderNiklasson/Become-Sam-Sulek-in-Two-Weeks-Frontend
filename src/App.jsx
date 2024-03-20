@@ -10,7 +10,7 @@ import { WorkoutList } from "./components/workout_list";
 import { Dashboard } from "./components/dashboard";
 import { Footer } from "./components/footer";
 import ComplexityTable from "./components/complexity_table";
-import User from "./components/users";
+import User from "./components/user";
 import UsersTable from "./components/users_table";
 
 import { Tabs } from "@mantine/core";
@@ -105,7 +105,7 @@ function App() {
             path="/complexity/table"
             element={<ComplexityTable workouts={workouts} />}
           />
-          <Route path="/users/id" element={<User />} />
+          <Route path="/users/:id" element={<User users={users} />} />
           <Route path="/users" element={<UsersTable users={users} />} />
         </Routes>
       </>
