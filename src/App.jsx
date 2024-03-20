@@ -12,6 +12,7 @@ import { Footer } from "./components/footer";
 import ComplexityTable from "./components/complexity_table";
 import User from "./components/user";
 import UsersTable from "./components/users_table";
+import Login from "./components/login";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
@@ -92,6 +93,7 @@ function App() {
           <Route path="/complexity/table" element={<ComplexityTable workouts={workouts}/>} />
           <Route path="/users/:id" element={<User users={users}/>} />
           <Route path="/users" element={<UsersTable users={users}/>} />
+          <Route path="login" element={<Login/>} />
         </Routes>
       </>
     );
