@@ -13,6 +13,8 @@ import ComplexityTable from "./components/complexity_table";
 import User from "./components/user";
 import UsersTable from "./components/users_table";
 import Login from "./components/login";
+import { Tabs } from "@mantine/core";
+import { WorkoutCreator } from "./components/workout-creator";
 
 function App() {
   const [workouts, setWorkouts] = useState([]);
@@ -33,8 +35,12 @@ function App() {
   useEffect(() => {
     if (!dataFetched) {
       Promise.all([
-        fetch("http://localhost:4000/exercise").then((response) => response.json()),
-        fetch("http://localhost:4000/users").then((response) => response.json())
+        fetch("http://localhost:4000/exercise").then((response) =>
+          response.json()
+        ),
+        fetch("http://localhost:4000/users").then((response) =>
+          response.json()
+        ),
       ])
         .then(([workoutsData, usersData]) => {
           setWorkouts(workoutsData);
@@ -42,7 +48,7 @@ function App() {
           setDataFetched(true);
         })
         .catch((error) => {
-          console.error('Error fetching data:', error);
+          console.error("Error fetching data:", error);
         });
     }
   }, [dataFetched]);
@@ -57,7 +63,12 @@ function App() {
         <UsersPreferences showModal={showModal} setShowModal={setShowModal} />
         <Routes>
           <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/generate" element={<WorkoutGenerator />} />
+          <Route
+            path="/generate"
+            element={
+              <WorkoutCreator workouts={workouts} activeUser={activeUser} />
+            }
+          />
           <Route
             path="/workouts"
             element={
@@ -90,10 +101,13 @@ function App() {
             path="/schedule"
             element={<Schedule activeUser={activeUser} />}
           />
-          <Route path="/complexity/table" element={<ComplexityTable workouts={workouts}/>} />
-          <Route path="/users/:id" element={<User users={users}/>} />
-          <Route path="/users" element={<UsersTable users={users}/>} />
-          <Route path="login" element={<Login/>} />
+          <Route
+            path="/complexity/table"
+            element={<ComplexityTable workouts={workouts} />}
+          />
+          <Route path="/users/:id" element={<User users={users} />} />
+          <Route path="/users" element={<UsersTable users={users} />} />
+          <Route path="login" element={<Login />} />
         </Routes>
       </>
     );

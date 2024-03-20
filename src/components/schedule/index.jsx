@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export function Schedule({ activeUser }) {
   const [days, setDays] = useState([]);
@@ -6,7 +7,6 @@ export function Schedule({ activeUser }) {
   const dragItem = useRef(null);
   const dragOverItem = useRef(null);
   const [showModal, setShowModal] = useState(false);
-  
 
   useEffect(() => {
     setIsLoaded(false);
@@ -17,6 +17,9 @@ export function Schedule({ activeUser }) {
       })
       .finally(() => {
         setIsLoaded(true);
+      })
+      .catch((error) => {
+        setDays([]);
       });
   }, []);
 
@@ -72,45 +75,65 @@ export function Schedule({ activeUser }) {
 
   if (!isLoaded) return <h1>Loading...</h1>;
 
+  if (!days.week)
+    return (
+      <div className="w-[100%] mt-[280px] flex justify-center flex-col">
+        <h1 className="text-5xl mx-auto text-customPurple">
+          No schedule found
+        </h1>
+        <h2 className="text-3xl mx-auto text-customPurple">
+          Please{" "}
+          <Link
+            className="text-customPink underline hover:text-customLightblue"
+            to={"/generate"}>
+            generate
+          </Link>
+          &nbsp;one
+        </h2>
+      </div>
+    );
+
   return (
-    <div className="grid grid-cols-3 gap-1 ml-[256px] p-10 w-[70%]">
-      {showModal && (
-        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center">
-          <div className="bg-white p-10 rounded-lg shadow-md transition-opacity duration-100">
-            <h1>Saved changes</h1>
-          </div>
-        </div>
-      )}
-      {days.week.map((day, index) => (
-        <div
-          key={`day-${index}`}
-          className={`mt-100 ml-200 border-2 border-customPurple p-5 bg-white shadow-md rounded-lg overflow-hidden cursor-move `}
-          draggable
-          onDragStart={() => (dragItem.current = index)}
-          onDragEnd={handleSort}
-          onDragEnter={() => (dragOverItem.current = index)}>
-          <h2 className="text-black">{day.name}</h2>
-          {day.exercises.length === 0 && (
-            <h3 className="text-black text-xs ml-1 ">Rest day</h3>
-          )}
-          {day.exercises.map((exercise, index) => (
-            <div
-              key={`exercise-${index}`}
-              className="border-[1px] border-black mt-2 ">
-              <h2 className="text-black text-xs ml-1 mb-2 p-1">
-                {exercise.name}
-              </h2>
-              <h2></h2>
+    <div>
+      <div className="grid grid-cols-3 gap-1 ml-[256px] p-10 w-[70%]">
+        {showModal && (
+          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center">
+            <div className="bg-white p-10 rounded-lg shadow-md transition-opacity duration-100">
+              <h1>Saved changes</h1>
             </div>
-          ))}
+          </div>
+        )}
+        {days.week.map((day, index) => (
+          <div
+            key={`day-${index}`}
+            className={`border-2 border-customPurple p-5 bg-white shadow-md rounded-lg overflow-hidden cursor-move`}
+            draggable
+            onDragStart={() => (dragItem.current = index)}
+            onDragEnd={handleSort}
+            onDragEnter={() => (dragOverItem.current = index)}>
+            <h2 className="text-black">{day.name}</h2>
+            {day.exercises.length === 0 && (
+              <h3 className="text-black text-xs ml-1">Rest day</h3>
+            )}
+            {day.exercises.map((exercise, exerciseIndex) => (
+              <div
+                key={`exercise-${exerciseIndex}`}
+                className="border-[1px] border-black mt-2">
+                <h2 className="text-black text-xs ml-1 mb-2 p-1">
+                  {exercise.name}
+                </h2>
+                <h2></h2>
+              </div>
+            ))}
+          </div>
+        ))}
+        <div className="flex justify-center">
+          <button
+            className="border-2 h-[50px] w-[120px] mt-20 bg-customPurple text-white text-xl rounded hover:bg-purple-800"
+            onClick={submitChanges}>
+            Save
+          </button>
         </div>
-      ))}
-      <div className="flex justify-center">
-        <button
-          className="border-2  h-[50px] w-[120px] mt-20 bg-customPurple text-white  text-xl rounded hover:bg-purple-800"
-          onClick={submitChanges}>
-          Save
-        </button>
       </div>
     </div>
   );
