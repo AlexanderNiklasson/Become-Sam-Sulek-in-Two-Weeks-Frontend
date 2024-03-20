@@ -11,7 +11,7 @@ export function Dashboard() {
         <img
           src="../src/assets/samsulek.png"
           alt="samsulek"
-          className="w-3/5 mx-auto animate-pulse "
+          className="w-3/5 mx-auto animate-pulse select-none "
         />
       </div>
     </div>

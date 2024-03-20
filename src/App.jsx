@@ -66,6 +66,7 @@ function App() {
 
   const handleLoginSuccess = (userData) => {
     setActiveUser(userData);
+    setDataFetched(false);
     setLoginSuccess(true);
     // You may perform additional actions after successful login if needed
   };
