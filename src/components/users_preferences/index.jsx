@@ -1,17 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function UsersPreferences() {
+export default function UsersPreferences({ users, setDataFetched }) {
+  const id = localStorage.getItem("id");
+  const [formChanged, setFormChanged] = useState(false); 
+  const [selectedUser, setSelectedUser] = useState(null);
   const [usersPreferences, setUsersPreferences] = useState({
     type: "",
     level: "",
     duration: ""
   });
 
+  useEffect(() => {
+    if (users && id) {
+      const matchingUser = users.find((user) => Number(user.id) === Number(id));
+      setSelectedUser(matchingUser);
+      setUsersPreferences({
+        type: matchingUser?.type || "",
+        level: matchingUser?.level || "",
+        duration: matchingUser?.duration || ""
+      });
+    }
+  }, [users, id]);
+
+  useEffect(() => {
+    if (selectedUser && formChanged) {
+      submitChanges();
+      setFormChanged(false); // Reset the flag after submission
+    }
+  }, [selectedUser, formChanged]);
+
   const handleChange = (e) => {
-    console.log(usersPreferences);
     setUsersPreferences({
       ...usersPreferences,
       [e.target.name]: e.target.value
+    });
+
+    updateSelectedUser(e.target.name, e.target.value);
+    setFormChanged(true); // Set the flag when form changes
+  };
+
+  const updateSelectedUser = (name, value) => {
+    setSelectedUser({
+      ...selectedUser,
+      [name]: value
+    });
+  };
+
+  const submitChanges = () => {
+    fetch(`http://localhost:4000/users/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(selectedUser)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to update user preferences');
+      }
+      console.log('User preferences updated successfully');
+      setDataFetched(false);
+    })
+    .catch(error => {
+      console.error('Error updating user preferences:', error);
     });
   };
 

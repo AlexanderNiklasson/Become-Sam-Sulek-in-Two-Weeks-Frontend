@@ -85,7 +85,7 @@ function App() {
             setShowModal={setShowModal}
             handleLogout={handleLogout}
           />
-          <UsersPreferences showModal={showModal} setShowModal={setShowModal} />
+          <UsersPreferences showModal={showModal} setShowModal={setShowModal} users={users} setDataFetched={setDataFetched} />
         </>
       )}
 
