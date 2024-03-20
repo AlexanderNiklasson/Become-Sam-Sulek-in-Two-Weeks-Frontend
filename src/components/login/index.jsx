@@ -84,19 +84,19 @@ export default function Login({ onLoginSuccess }) {
                       />
                     </div>
                   </div>
-                  <div>
-                    <button
-                      onClick={() => setShowSignup(true)}
-                      className="bg-gradient-to-r from-customPink to-customPurple hover:from-customPink hover:to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg">
-                      Sign up
-                    </button>
-                  </div>
                   <div className="mt-6">
                     <button
                       type="submit"
                       className="bg-gradient-to-r from-customPink to-customPurple hover:from-customPink hover:to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg">
                       Login
                     </button>
+                  <div>
+                    <button
+                      onClick={() => setShowSignup(true)}
+                      className="bg-gradient-to-r from-customPink to-customPurple hover:from-customPink hover:to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg mt-5">
+                      Sign up
+                    </button>
+                  </div>
                   </div>
                 </form>
               </div>

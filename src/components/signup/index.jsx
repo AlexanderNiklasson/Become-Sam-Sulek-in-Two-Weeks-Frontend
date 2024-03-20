@@ -102,12 +102,18 @@ export function SignUp({ setShowSignup }) {
                     />
                   </div>
                 </div>
-
                 <div className="mt-6">
                   <button
                     type="submit"
                     className="bg-gradient-to-r from-customPink to-customPurple hover:from-customPink hover:to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg">
                     Sign up
+                  </button>
+                </div>
+                <div className="mt-6">
+                  <button
+                    onClick={() => setShowSignup(false)}
+                    className="bg-gradient-to-r from-customPink to-customPurple hover:from-customPink hover:to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg">
+                    Go back
                   </button>
                 </div>
               </form>
