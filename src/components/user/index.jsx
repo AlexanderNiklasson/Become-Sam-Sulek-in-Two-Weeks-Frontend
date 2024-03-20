@@ -32,7 +32,7 @@ export default function User({ users }) {
                   {selectedUser.username}
                 </h1>
                 <p className="mt-2 text-sm text-gray-500">
-                  {selectedUser.type} | {selectedUser.level}
+                  {selectedUser.type} | {selectedUser.level} | {selectedUser.duration}
                 </p>
               </div>
               <div className="mt-8">
