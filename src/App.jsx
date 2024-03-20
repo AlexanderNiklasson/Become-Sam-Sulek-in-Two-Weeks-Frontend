@@ -105,6 +105,8 @@ function App() {
             path="/complexity/table"
             element={<ComplexityTable workouts={workouts} />}
           />
+          <Route path="/users/id" element={<User />} />
+          <Route path="/users" element={<UsersTable users={users} />} />
         </Routes>
       </>
     );

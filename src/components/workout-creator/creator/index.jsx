@@ -9,8 +9,10 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router";
 
-export function Creator({ workouts }) {
+export function Creator({ workouts, activeUser }) {
+  const navigate = useNavigate();
   const [days] = useState([
     "Monday",
     "Tuesday",
@@ -62,6 +64,29 @@ export function Creator({ workouts }) {
       <Text c="dimmed">Nothing found</Text>
     );
 
+  const submitChanges = () => {
+    if (exercises.length === 0) return;
+
+    const ids = exercises.map((exercise) => exercise.map(({ id }) => id));
+
+    const requestBody = {
+      name: `${activeUser.id}'s schedule`,
+      ownerId: activeUser.id,
+      ids: ids,
+    };
+
+    console.log("Request Body:", JSON.stringify(requestBody)); // Log the body
+
+    fetch("http://localhost:4000/schedule", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    }).then(() => {
+      navigate("/schedule");
+    });
+  };
   return (
     <div>
       <Modal
@@ -102,15 +127,13 @@ export function Creator({ workouts }) {
       </Modal>
       <div className="grid grid-cols-3 gap-2 mt-3 ">
         {days.map((day, index) => (
-          <div
-            key={index}
-            className="border-2 p-2 justify-self-auto hover:cursor-pointer ">
+          <div key={index} className="border-2 p-2 justify-self-auto  ">
             <button
               onClick={() => {
                 setSelectedDay(index);
                 open();
               }}
-              className="w-[100%]">
+              className="w-[100%] hover:underline">
               <h1>{day}</h1>
             </button>
 
@@ -138,6 +161,11 @@ export function Creator({ workouts }) {
           </div>
         ))}
       </div>
+      <button
+        className="border-2 h-[50px] w-[120px] mt-20 bg-customPurple text-white text-xl rounded hover:bg-purple-800"
+        onClick={submitChanges}>
+        Save
+      </button>
     </div>
   );
 }

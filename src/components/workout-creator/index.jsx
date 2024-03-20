@@ -40,7 +40,7 @@ export function WorkoutCreator({ workouts, activeUser }) {
             <WorkoutGenerator />
           </Tabs.Panel>
           <Tabs.Panel value="Custom">
-            <Creator workouts={workouts} />
+            <Creator workouts={workouts} activeUser={activeUser} />
           </Tabs.Panel>
         </Tabs>
       </div>
