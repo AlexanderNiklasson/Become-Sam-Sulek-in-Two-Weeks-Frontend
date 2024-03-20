@@ -67,7 +67,16 @@ export function Creator({ workouts, activeUser }) {
   const submitChanges = () => {
     if (exercises.length === 0) return;
 
-    const ids = exercises.map((exercise) => exercise.map(({ id }) => id));
+    const ids = exercises.map((exerciseList) => {
+      return exerciseList.map((exercise) => {
+        // Find the workout corresponding to the exercise name
+        const workout = workouts.find(
+          (workout) => workout.name === exercise.name
+        );
+        // Return the ID of the found workout
+        return workout ? workout.intId : null;
+      });
+    });
 
     const requestBody = {
       name: `${activeUser.id}'s schedule`,
