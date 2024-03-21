@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Dumbells from "./workout_item_dumbell";
-import viewDetails from "../../../public/assets/view-details.png";
+import viewDetails from "../../../../public/assets/view-details.png";
 
 export function WorkoutItem({ workout, showModal, setShowModal }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -47,8 +47,7 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
                   setShowModal(false);
                   setThisShowModal(false);
                 }}
-                className="border-2 h-[50px] w-[120px]  bg-customPurple text-white text-xl rounded hover:bg-purple-800"
-              >
+                className="border-2 h-[50px] w-[120px]  bg-customPurple text-white text-xl rounded hover:bg-purple-800">
                 Close
               </button>
             </div>
@@ -85,8 +84,7 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
               setShowModal(true);
               setThisShowModal(true);
             }}
-            className="text-purple-500 hover:underline"
-          >
+            className="text-purple-500 hover:underline">
             Open Instructions
           </button>
           <img
