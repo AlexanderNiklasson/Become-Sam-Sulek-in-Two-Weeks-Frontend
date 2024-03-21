@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { isAuthenticated, logout } from "../../auth";
+import navHouse from "../../../public/assets/nav-house.svg";
+import navSchedule from "../../../public/assets/nav-schedule.svg";
+import navWorkouts from "../../../public/assets/nav-workouts.svg";
+import navUser from "../../../public/assets/nav-user.svg";
+import navHighscore from "../../../public/assets/nav-highscore.svg";
+import navLogout from "../../../public/assets/logout.svg";
 
 export function SideNav({ showModal, handleLogout }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,46 +20,42 @@ export function SideNav({ showModal, handleLogout }) {
     <div
       className={`fixed top-[88px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500 ${
         showModal ? "z-[-1]" : "z-[1]"
-      }`}
-    >
+      }`}>
       <div>
         <ul className="space-y-4 min-h-[280px] ml-3">
           <li className="flex">
             <img
-              src="../src/assets/nav-house.svg"
+              src={navHouse}
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2"
             />
             <Link
               to={"/"}
-              className="underline text-customPurple hover:no-underline "
-            >
+              className="underline text-customPurple hover:no-underline ">
               Home
             </Link>
           </li>
           <li className="flex">
             <img
-              src="../src/assets/nav-schedule.svg"
+              src={navSchedule}
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
             <Link
               to={`/schedule/${localStorage.getItem("id")}`}
-              className="underline text-customPurple hover:no-underline "
-            >
+              className="underline text-customPurple hover:no-underline ">
               <code>Schedule</code>
             </Link>
           </li>
           <li className="flex">
             <img
-              src="../src/assets/nav-workouts.svg"
+              src={navWorkouts}
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
             <Link
               to={"workouts"}
-              className="underline text-customPurple hover:no-underline"
-            >
+              className="underline text-customPurple hover:no-underline">
               Workouts
             </Link>
           </li>
@@ -64,8 +66,7 @@ export function SideNav({ showModal, handleLogout }) {
                 onKeyDown={() => {}}
                 className={`underline hover:no-underline text-customPurple ${
                   isOpen ? "text-gray-500" : "text-customPurple"
-                }`}
-              >
+                }`}>
                 Difficulty
               </button>
 
@@ -82,8 +83,7 @@ export function SideNav({ showModal, handleLogout }) {
                   <li key={index}>
                     <Link
                       to={`/workouts/${item.toLowerCase()}`} // Pass level as a parameter
-                      className="text-customPurple underline hover:no-underline"
-                    >
+                      className="text-customPurple underline hover:no-underline">
                       {item}
                     </Link>
                   </li>
@@ -97,33 +97,31 @@ export function SideNav({ showModal, handleLogout }) {
         <ul className="space-y-4 mt-20">
           <li className="flex">
             <img
-              src="../src/assets/nav-user.svg"
+              src={navUser}
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
             <Link
               to={"/users"}
-              className="text-customPurple underline hover:no-underline"
-            >
+              className="text-customPurple underline hover:no-underline">
               Users
             </Link>
           </li>
           <li className="flex">
             <img
-              src="../src/assets/nav-highscore.svg"
+              src={navHighscore}
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
             <Link
               to={"/complexity/table"}
-              className="text-customPurple underline hover:no-underline"
-            >
+              className="text-customPurple underline hover:no-underline">
               Complexity Rankings
             </Link>
           </li>
           <li className="flex">
             <img
-              src="../src/assets/logout.svg"
+              src={navLogout}
               alt="logo"
               className="h-6 w-6 text-customPurple mr-2 "
             />
@@ -133,8 +131,7 @@ export function SideNav({ showModal, handleLogout }) {
                 handleLogout();
                 navigate("/login");
               }}
-              className="text-customPurple underline hover:no-underline"
-            >
+              className="text-customPurple underline hover:no-underline">
               Logout
             </button>
           </li>

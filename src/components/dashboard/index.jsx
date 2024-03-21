@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import samSulek from "../../../public/assets/samsulek.png";
 
 export function Dashboard({ users }) {
   const id = localStorage.getItem("id");
@@ -24,7 +25,7 @@ export function Dashboard({ users }) {
         </div>
         <div className="fixed bottom-0 left-0 z-[-1] w-full bg-transparent ">
           <img
-            src="../src/assets/samsulek.png"
+            src={samSulek}
             alt="samsulek"
             className="w-3/5 mx-auto animate-pulse select-none "
           />

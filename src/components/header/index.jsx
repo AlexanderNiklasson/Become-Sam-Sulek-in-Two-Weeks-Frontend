@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../auth";
+import headerWeight from "../../../public/assets/dumbell.png";
 
 export function Header({ showModal }) {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export function Header({ showModal }) {
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <img
-            src="../src/assets/header-weight.png"
+            src={headerWeight}
             alt="logo"
             className="h-12 w-12 text-customPurple mr-5 ml-5 animate-bounce"
           />
