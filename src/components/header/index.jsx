@@ -2,6 +2,15 @@ import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../auth";
 import headerWeight from "../../../public/assets/dumbell.png";
 
+/**
+ * Represents the Header component.
+ * - Displays a header containing a logo and navigation buttons.
+ * - Renders differently based on user authentication status.
+ * - Provides buttons for generating workouts and accessing the user profile.
+ * @param showModal A boolean indicating whether to show a modal.
+ * @returns The Header component containing a logo and navigation buttons based on user authentication status.
+ */
+
 export function Header({ showModal }) {
   const navigate = useNavigate();
 

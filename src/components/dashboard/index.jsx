@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
 import samSulek from "../../../public/assets/samsulek.png";
 
+/**
+ * Represents the Dashboard component.
+ * - Displays a personalized welcome message for the selected user.
+ * - Retrieves the user's ID from local storage and matches it with the users' data to identify the selected user.
+ * - Renders the welcome message and an image.
+ * @param users The array of users from which to identify the selected user.
+ * @returns The Dashboard component displaying a personalized welcome message and an image.
+ */
+
 export function Dashboard({ users }) {
   const id = localStorage.getItem("id");
   const [selectedUser, setSelectedUser] = useState(null);

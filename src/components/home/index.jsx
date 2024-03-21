@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
 
+/**
+ * Represents the Home component.
+ * - Displays a link to navigate to the home page.
+ * - Renders a back arrow icon with the link text.
+ * @returns The Home component providing a link to navigate to the home page.
+ */
+
 export default function Home() {
     return (
         <div className="flex items-center mt-4">

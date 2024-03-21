@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Represents the SideNav component.
+ * - Displays a side navigation menu with links to various pages.
+ * - Renders differently based on user authentication status.
+ * - Provides links to the home page, user schedule, workouts, difficulty levels, users, complexity rankings, and logout functionality.
+ * @param showModal A boolean indicating whether to show a modal.
+ * @param handleLogout Function to call upon logout.
+ * @returns The SideNav component containing links to various pages and logout functionality based on user authentication status.
+ */
+
 export function SignUp({ setShowSignup }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

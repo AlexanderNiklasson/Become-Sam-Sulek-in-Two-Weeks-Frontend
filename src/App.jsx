@@ -14,6 +14,21 @@ import Login from "./components/login";
 import { WorkoutCreator } from "./components/workout-creator";
 import { isAuthenticated } from "./auth";
 
+/**
+ * This component represents the main application entry point. It handles rendering various components based on user authentication status and manages state for user preferences, workouts, and authentication status.
+ * - Manages state for workouts, current page, user preferences, data fetching status, modal visibility, users data, and active user.
+ * - Fetches workout and user data upon authentication.
+ * - Handles page change events for pagination.
+ * - Redirects to login page if not authenticated.
+ * - Renders different components based on authentication status:
+ *    - If authenticated:
+ *        - Renders header, side navigation, and user preferences components.
+ *        - Renders dashboard, workout creator, workout list, schedule, complexity table, user details, and user table components based on routes.
+ *    - If not authenticated:
+ *        - Renders the login component.
+ * @returns The main application component responsible for managing state and rendering other components based on user authentication status and routes.
+ */
+
 function App() {
   const [workouts, setWorkouts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

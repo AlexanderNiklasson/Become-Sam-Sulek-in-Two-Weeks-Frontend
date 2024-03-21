@@ -3,6 +3,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { SignUp } from "../signup";
 
+/**
+ * Represents the Login component.
+ * - Provides a form for users to input their username and password for authentication.
+ * - Handles login functionality, including sending a POST request to the authentication endpoint.
+ * - Stores authentication token, username, and ID in local storage upon successful login.
+ * - Redirects to the home page upon successful login.
+ * - Provides a button to switch to the sign-up form.
+ * @param onLoginSuccess Function to call upon successful login.
+ * @returns The Login component containing a form for user authentication and an option to switch to the sign-up form.
+ */
+
 export default function Login({ onLoginSuccess }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
