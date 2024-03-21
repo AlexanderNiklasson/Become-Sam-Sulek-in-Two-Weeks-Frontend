@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiUrl } from "../../data";
 
 /**
  * Represents the SideNav component.
@@ -20,7 +21,7 @@ export function SignUp({ setShowSignup }) {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:4000/auth/signup", {
+    fetch(`${apiUrl}/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

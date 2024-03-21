@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { apiUrl } from "../../data";
 
 export function Schedule() {
   const [days, setDays] = useState([]);
@@ -19,7 +20,7 @@ export function Schedule() {
 
     // Check if token exists
     if (token) {
-      fetch(`http://localhost:4000/schedule/${id}`, {
+      fetch(`${apiUrl}/schedule/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Include token in the Authorization header
         },
@@ -79,7 +80,7 @@ export function Schedule() {
   };
 
   const submitChanges = () => {
-    fetch(`http://localhost:4000/schedule/${localStorage.getItem("id")}`, {
+    fetch(`${apiUrl}/schedule/${localStorage.getItem("id")}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +94,7 @@ export function Schedule() {
   };
 
   const submitDelete = () => {
-    fetch(`http://localhost:4000/schedule/${localStorage.getItem("id")}`, {
+    fetch(`${apiUrl}/schedule/${localStorage.getItem("id")}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

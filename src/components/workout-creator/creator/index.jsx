@@ -10,6 +10,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
+import { apiUrl } from "../../../data";
 
 export function Creator({ workouts, activeUser }) {
   const navigate = useNavigate();
@@ -84,7 +85,7 @@ export function Creator({ workouts, activeUser }) {
       ids: ids,
     };
 
-    fetch("http://localhost:4000/schedule", {
+    fetch(`${apiUrl}/schedule`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

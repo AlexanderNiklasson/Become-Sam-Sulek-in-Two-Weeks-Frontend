@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { SignUp } from "../signup";
+import { apiUrl } from "../../data";
 
 /**
  * Represents the Login component.
@@ -24,7 +25,7 @@ export default function Login({ onLoginSuccess }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:4000/auth/signin", {
+      const response = await axios.post(`${apiUrl}/auth/signin`, {
         username,
         password,
       });
@@ -101,13 +102,13 @@ export default function Login({ onLoginSuccess }) {
                       className="bg-gradient-to-r from-customPink to-customPurple hover:from-customPink hover:to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg">
                       Login
                     </button>
-                  <div>
-                    <button
-                      onClick={() => setShowSignup(true)}
-                      className="bg-gradient-to-r from-customPink to-customPurple hover:from-customPink hover:to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg mt-5">
-                      Sign up
-                    </button>
-                  </div>
+                    <div>
+                      <button
+                        onClick={() => setShowSignup(true)}
+                        className="bg-gradient-to-r from-customPink to-customPurple hover:from-customPink hover:to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg mt-5">
+                        Sign up
+                      </button>
+                    </div>
                   </div>
                 </form>
               </div>

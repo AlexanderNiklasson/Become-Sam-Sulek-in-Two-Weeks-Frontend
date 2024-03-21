@@ -3,6 +3,7 @@ import WorkoutGenerator from "../workout_generator";
 import { Creator } from "./creator";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { apiUrl } from "../../data";
 
 export function WorkoutCreator({ workouts }) {
   const [hasSchedule, setHasSchedule] = useState(true);
@@ -10,7 +11,7 @@ export function WorkoutCreator({ workouts }) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (isLoaded) return;
-    fetch(`http://localhost:4000/schedule/${localStorage.getItem("id")}`, {
+    fetch(`${apiUrl}/schedule/${localStorage.getItem("id")}`, {
       headers: {
         Authorization: `Bearer ${token}`, // Include token in the Authorization header
       },

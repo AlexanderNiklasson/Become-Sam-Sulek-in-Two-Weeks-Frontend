@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import Home from "../home/index.jsx";
 import done from "../../../public/assets/done.png";
+import { apiUrl } from "../../data.jsx";
 
 export default function WorkoutGenerator() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export default function WorkoutGenerator() {
     event.preventDefault();
 
     console.log("Pre-test log before attempting post request");
-    fetch(`http://localhost:4000/schedule/generate`, {
+    fetch(`${apiUrl}/schedule/generate`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

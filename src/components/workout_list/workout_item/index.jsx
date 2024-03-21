@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Dumbells from "./workout_item_dumbell";
+import viewDetails from "../../../public/assets/view-details.png";
 
 export function WorkoutItem({ workout, showModal, setShowModal }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -89,7 +90,7 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
             Open Instructions
           </button>
           <img
-            src="../src/assets/view-details.png"
+            src={viewDetails}
             alt="logo"
             className="h-6 w-6 text-customPurple mr-5 ml-2"
           />

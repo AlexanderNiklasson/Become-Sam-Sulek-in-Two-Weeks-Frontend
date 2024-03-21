@@ -13,6 +13,7 @@ import UsersTable from "./components/users_table";
 import Login from "./components/login";
 import { WorkoutCreator } from "./components/workout-creator";
 import { isAuthenticated } from "./auth";
+import { apiUrl } from "../src/data";
 
 /**
  * This component represents the main application entry point. It handles rendering various components based on user authentication status and manages state for user preferences, workouts, and authentication status.
@@ -40,7 +41,6 @@ function App() {
   const [activeUser, setActiveUser] = useState(null); // Track active user
   const navigate = useNavigate();
   const [loginSuccess, setLoginSuccess] = useState(false);
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -61,10 +61,10 @@ function App() {
         Authorization: `Bearer ${token}`,
       };
       Promise.all([
-        fetch("http://localhost:4000/exercise", { headers }).then((response) =>
+        fetch(`${apiUrl}/exercise`, { headers }).then((response) =>
           response.json()
         ),
-        fetch("http://localhost:4000/users", { headers }).then((response) =>
+        fetch(`${apiUrl}/users`, { headers }).then((response) =>
           response.json()
         ),
       ])
@@ -100,14 +100,19 @@ function App() {
             setShowModal={setShowModal}
             handleLogout={handleLogout}
           />
-          <UsersPreferences showModal={showModal} setShowModal={setShowModal} users={users} setDataFetched={setDataFetched} />
+          <UsersPreferences
+            showModal={showModal}
+            setShowModal={setShowModal}
+            users={users}
+            setDataFetched={setDataFetched}
+          />
         </>
       )}
 
       <Routes>
         {isAuthenticated() ? ( // Render components only if authenticated
           <>
-            <Route path="/" element={<Dashboard users={users}/>} />
+            <Route path="/" element={<Dashboard users={users} />} />
             <Route
               path="/generate"
               element={
