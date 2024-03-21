@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Home from "../home/index.jsx";
+import done from "../../../public/assets/done.png";
 
 export default function WorkoutGenerator() {
   const navigate = useNavigate();
@@ -121,7 +122,7 @@ export default function WorkoutGenerator() {
             style={{ backgroundColor: "white" }}>
             <div className="flex items-center">
               <img
-                src="../src/assets/done.png"
+                src={done}
                 alt="logo"
                 className="h-10 w-10 text-customPurple animate-pulse"
               />
