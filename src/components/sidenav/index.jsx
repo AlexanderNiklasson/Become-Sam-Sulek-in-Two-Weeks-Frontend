@@ -14,7 +14,8 @@ export function SideNav({ showModal, handleLogout }) {
     <div
       className={`fixed top-[88px] left-0 h-full w-64 bg-gray-100 text-white p-10 border-t border-gray-500 ${
         showModal ? "z-[-1]" : "z-[1]"
-      }`}>
+      }`}
+    >
       <div>
         <ul className="space-y-4 min-h-[280px] ml-3">
           <li className="flex">
@@ -25,7 +26,8 @@ export function SideNav({ showModal, handleLogout }) {
             />
             <Link
               to={"/"}
-              className="underline text-customPurple hover:no-underline ">
+              className="underline text-customPurple hover:no-underline "
+            >
               Home
             </Link>
           </li>
@@ -37,7 +39,8 @@ export function SideNav({ showModal, handleLogout }) {
             />
             <Link
               to={`/schedule/${localStorage.getItem("id")}`}
-              className="underline text-customPurple hover:no-underline ">
+              className="underline text-customPurple hover:no-underline "
+            >
               <code>Schedule</code>
             </Link>
           </li>
@@ -49,7 +52,8 @@ export function SideNav({ showModal, handleLogout }) {
             />
             <Link
               to={"workouts"}
-              className="underline text-customPurple hover:no-underline">
+              className="underline text-customPurple hover:no-underline"
+            >
               Workouts
             </Link>
           </li>
@@ -60,17 +64,16 @@ export function SideNav({ showModal, handleLogout }) {
                 onKeyDown={() => {}}
                 className={`underline hover:no-underline text-customPurple ${
                   isOpen ? "text-gray-500" : "text-customPurple"
-                }`}>
+                }`}
+              >
                 Difficulty
               </button>
 
-              <img
-                src="../src/assets/nav-triangle-open.svg"
-                className={`h-3 w-3 text-customPurple ml-10 mt-1.5 ${
-                  isOpen ? "transform rotate-180" : ""
-                }`}
-                alt="arrow"
-              />
+              {isOpen ? (
+                <span className="text-customPurple ml-10 mt-1.5">↓</span>
+              ) : (
+                <span className="text-customPurple ml-10 mt-1.5">↑</span>
+              )}
             </div>
 
             {isOpen && (
@@ -79,7 +82,8 @@ export function SideNav({ showModal, handleLogout }) {
                   <li key={index}>
                     <Link
                       to={`/workouts/${item.toLowerCase()}`} // Pass level as a parameter
-                      className="text-customPurple underline hover:no-underline">
+                      className="text-customPurple underline hover:no-underline"
+                    >
                       {item}
                     </Link>
                   </li>
@@ -99,7 +103,8 @@ export function SideNav({ showModal, handleLogout }) {
             />
             <Link
               to={"/users"}
-              className="text-customPurple underline hover:no-underline">
+              className="text-customPurple underline hover:no-underline"
+            >
               Users
             </Link>
           </li>
@@ -111,7 +116,8 @@ export function SideNav({ showModal, handleLogout }) {
             />
             <Link
               to={"/complexity/table"}
-              className="text-customPurple underline hover:no-underline">
+              className="text-customPurple underline hover:no-underline"
+            >
               Complexity Rankings
             </Link>
           </li>
@@ -127,7 +133,8 @@ export function SideNav({ showModal, handleLogout }) {
                 handleLogout();
                 navigate("/login");
               }}
-              className="text-customPurple underline hover:no-underline">
+              className="text-customPurple underline hover:no-underline"
+            >
               Logout
             </button>
           </li>

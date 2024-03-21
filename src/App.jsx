@@ -17,7 +17,7 @@ import { isAuthenticated } from "./auth";
 function App() {
   const [workouts, setWorkouts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 9;
+  const perPage = 5;
   const [usersPreferences, setUsersPreferences] = useState({});
   const [dataFetched, setDataFetched] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -92,7 +92,7 @@ function App() {
       <Routes>
         {isAuthenticated() ? ( // Render components only if authenticated
           <>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard users={users}/>} />
             <Route
               path="/generate"
               element={

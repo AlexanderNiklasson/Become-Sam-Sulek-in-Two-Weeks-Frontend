@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Dumbells from "./workout_item_dumbell";
 
 export function WorkoutItem({ workout, showModal, setShowModal }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -45,7 +46,8 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
                   setShowModal(false);
                   setThisShowModal(false);
                 }}
-                className="border-2 h-[50px] w-[120px]  bg-customPurple text-white text-xl rounded hover:bg-purple-800">
+                className="border-2 h-[50px] w-[120px]  bg-customPurple text-white text-xl rounded hover:bg-purple-800"
+              >
                 Close
               </button>
             </div>
@@ -68,16 +70,23 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
           <strong>Primary Muscles:</strong> {workout.primaryMuscles.join(", ")}
         </p>
         <p className="text-gray-700 mb-2">
-          <strong>Complexity:</strong> {workout.complexity}
+          <strong>
+            <span className="flex items-center">
+              Complexity:
+              <Dumbells workout={workout} />
+            </span>
+          </strong>
         </p>
+
         <div className="flex items-center animate-pulse">
           <button
             onClick={() => {
               setShowModal(true);
               setThisShowModal(true);
             }}
-            className="text-purple-500 hover:underline">
-            View Details
+            className="text-purple-500 hover:underline"
+          >
+            Open Instructions
           </button>
           <img
             src="../src/assets/view-details.png"
@@ -91,13 +100,6 @@ export function WorkoutItem({ workout, showModal, setShowModal }) {
         alt="logo"
         className="h-40 w-40 text-customPurple mr-5 ml-2 border-2 border-black"
       />
-
-      {/* Uncomment this below to set the associated correct picture to the DOM */}
-      {/* <img
-        src={`/${workout.images[0]}`}
-        alt={workout.name}
-        className="w-32 h-32 object-cover mr-5"
-      /> */}
     </div>
   );
 }
