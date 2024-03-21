@@ -31,8 +31,10 @@ export default function User({ users }) {
                 <h1 className="text-3xl font-semibold text-gray-900">
                   {selectedUser.username}
                 </h1>
-                <p className="mt-2 text-sm text-gray-500">
-                  {selectedUser.type} | {selectedUser.level} | {selectedUser.duration}
+                <p className="mt-2 text-sm text-gray-500 ">
+                  Exercise Style | <b>{selectedUser.type}</b> <br/> 
+                  Skill Level | <b>{selectedUser.level}</b> <br/>
+                  Workout Length| <b>{selectedUser.duration} minutes</b>
                 </p>
               </div>
               <div className="mt-8">
@@ -43,9 +45,8 @@ export default function User({ users }) {
                         Check Schedule
                       </Link>
                     </p>
-                    <p className="mt-1 text-sm text-gray-900">MORE STUFF</p>
-                  </div>
-                  {/* Add more stuff if needed here */}
+                    <p className="mt-1 text-sm text-gray-900">{/* Add more stuff if wanted here */}</p>
+                  </div> 
                 </div>
               </div>
             </div>
