@@ -244,6 +244,6 @@ const dummyWorkouts = [
     images: ["Circus_Bell/0.jpg", "Circus_Bell/1.jpg"],
   },
 ];
-const apiUrl = "http://16.171.53.254:4000";
+const apiUrl = "http://localhost:4000";
 
 export { dummyWorkouts, apiUrl };
